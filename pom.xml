@@ -36,6 +36,12 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- mysql 数据库驱动. -->
 		<dependency>
@@ -60,27 +66,28 @@
 			<version>2.2.2</version>
 		</dependency>
 
-		<!-- log4j -->
+
+		<!-- 单元测试 -->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.8</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
 
 	<!-- 由于网络限制，增加内部仓库，外网环境可以去除，使用默认仓库 -->
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name> Maven Repository Switchboard</name>
-			<layout> default</layout>
-			<url>http://maven.intra.ffan.com/nexus/content/groups/public/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+	<!--<repositories>-->
+		<!--<repository>-->
+			<!--<id>central</id>-->
+			<!--<name> Maven Repository Switchboard</name>-->
+			<!--<layout> default</layout>-->
+			<!--<url>http://maven.intra.ffan.com/nexus/content/groups/public/</url>-->
+			<!--<snapshots>-->
+				<!--<enabled>false</enabled>-->
+			<!--</snapshots>-->
+		<!--</repository>-->
+	<!--</repositories>-->
 
 	<!-- Package as an executable jar，用于maven将spirng boot项目打成可运行的fat jar -->
 	<build>
