@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径,tomcat的logs目录中-->
-    <property name="LOG_HOME" value="F:/app_logs" />
+    <property name="LOG_HOME" value="/app/logs/swagboot" />
 
     <!-- appender 的配置表示打印到控制台。 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -16,7 +16,7 @@
         <Prudent>true</Prudent>
         <rollingPolicy  class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <!--日志文件输出的文件名-->
-                <FileNamePattern>${LOG_HOME}/mySpringBootApp.log.%d{yyyy-MM-dd}.log</FileNamePattern>
+                <FileNamePattern>${LOG_HOME}/swagboot.log.%d{yyyy-MM-dd}.log</FileNamePattern>
                 <!-- keep 60 days worth of history -->
                 <MaxHistory>60</MaxHistory>
         </rollingPolicy>
