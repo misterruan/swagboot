@@ -1,8 +1,8 @@
-package com.hl.repository;
+package com.rock.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.hl.model.MUser;
+import com.rock.model.MUser;
 
 public interface UserRepository extends JpaRepository<MUser, Long> {
 

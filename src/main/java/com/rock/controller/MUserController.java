@@ -1,13 +1,13 @@
-package com.hl.controller;
+package com.rock.controller;
 
-import com.hl.congfig.AppConfigBean;
+import com.rock.congfig.AppConfigBean;
 import io.swagger.annotations.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.hl.model.MUser;
-import com.hl.service.UserService;
+import com.rock.model.MUser;
+import com.rock.service.UserService;
 
 @RestController
 @RequestMapping(value = "/usersJpa")

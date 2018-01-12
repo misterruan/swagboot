@@ -1,14 +1,11 @@
-package com.hl.service.impl;
-
-import java.util.List;
+package com.rock.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import com.hl.model.MUser;
-import com.hl.repository.UserRepository;
-import com.hl.service.UserService;
+import com.rock.model.MUser;
+import com.rock.repository.UserRepository;
+import com.rock.service.UserService;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service

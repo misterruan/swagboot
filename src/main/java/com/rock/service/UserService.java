@@ -1,8 +1,6 @@
-package com.hl.service;
+package com.rock.service;
 
-import java.util.List;
-
-import com.hl.model.MUser;
+import com.rock.model.MUser;
 
 public interface UserService {
 
