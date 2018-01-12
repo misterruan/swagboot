@@ -1,5 +1,6 @@
 package com.hl.controller;
 
+import com.hl.congfig.AppConfigBean;
 import io.swagger.annotations.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class MUserController {
 	
 	@Autowired
 	private UserService userService;
+    @Autowired
+    private AppConfigBean appConfigBean;
 
     /**
      * 同时支持get、post请求
