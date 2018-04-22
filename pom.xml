@@ -13,6 +13,7 @@
 		<java.version>1.8</java.version>
 		<fastjson.version>1.2.12</fastjson.version>
 		<commons.lang.version>3.4</commons.lang.version>
+		<bouncycastle.verson>1.46</bouncycastle.verson>
 	</properties>
 
 	<!-- spring boot 父节点依赖, 引入这个之后相关的引入就不需要添加version配置， spring boot会自动选择最合适的版本进行添加。 -->
@@ -24,6 +25,12 @@
 	</parent>
 
 	<dependencies>
+		<!--加密相关 -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk16</artifactId>
+			<version>${bouncycastle.verson}</version>
+		</dependency>
 		<!-- spring boot web支持：mvc,aop... -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -131,6 +138,12 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
+		</dependency>
+		<!-- google josn工具 -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>

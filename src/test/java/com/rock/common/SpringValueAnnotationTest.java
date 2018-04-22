@@ -1,7 +1,9 @@
+package com.rock.common;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rock.App;
-import com.rock.congfig.AppConfigBean;
+import com.rock.common2.util.JsonUtils;
+import com.rock.model.AppConfigBean;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(classes = App.class)
 //@ActiveProfiles("sit")
 
-public class BootTest {
+public class SpringValueAnnotationTest {
 
     @Autowired
     private AppConfigBean appConfigBean;
@@ -23,7 +25,8 @@ public class BootTest {
     @Test
     //测试@Value注解是否正常取值
     public void testGetBeanPoperties() throws JsonProcessingException {
-        System.out.print(new ObjectMapper().writeValueAsString(appConfigBean));
+
+        System.out.print(JsonUtils.toJsonWithCatchException(appConfigBean));
     }
 
 }

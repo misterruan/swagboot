@@ -1,10 +1,10 @@
-package com.rock.congfig;
+package com.rock.model;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by user on 2017/3/26.
+ * Created by rock on 2017/3/26.
  * 用于测试@Value 注解读取properties中的属性，缓存以供查询
  * 仅供测试@Value，无实际意义
  */

@@ -1,4 +1,4 @@
-1.运行 App 类，直接在浏览器上访问 http://localhost:8080/swagger-ui.html 测试
+1.选择运行环境，运行App类，直接在浏览器上访问 http://localhost:{port}/swagger-ui.html 测试
 
 2.第一次运行后，将application.properties 中 spring.jpa.properties.hibernate.hbm2ddl.auto=create-drop注释掉，否则每次启动将重新建表
 
