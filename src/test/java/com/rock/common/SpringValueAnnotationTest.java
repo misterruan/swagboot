@@ -2,7 +2,7 @@ package com.rock.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rock.App;
-import com.rock.common2.util.JsonUtils;
+import com.rock.common.util.JsonUtils;
 import com.rock.model.AppConfigBean;
 import org.junit.runner.RunWith;
 import org.junit.Test;
