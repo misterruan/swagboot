@@ -3,7 +3,7 @@ package com.rock.common.aspect;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.rock.common.util.IPUtils;
-import com.rock.common2.util.JsonUtils;
+import com.rock.common.util.JsonUtils;
 import com.rock.model.base.ActionLog;
 import com.rock.repository.base.ActionLogRepository;
 import lombok.extern.slf4j.Slf4j;
