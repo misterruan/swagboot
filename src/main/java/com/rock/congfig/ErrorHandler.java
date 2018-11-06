@@ -3,6 +3,7 @@ package com.rock.congfig;
 import com.google.gson.JsonObject;
 import com.rock.common.exception.ExceptionConstants;
 import com.rock.common.exception.SwagBootCommonException;
+import com.rock.model.base.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,7 @@ import java.util.Map;
 
 /**
  * 全局的异常捕获处理
+ *
  * @ControllerAdvice 注解定义全局异常处理类
  * @ExceptionHandler 注解声明异常处理方法
  */
@@ -40,26 +42,22 @@ public class ErrorHandler {
     //业务异常
     @ExceptionHandler(value = SwagBootCommonException.class)
     @ResponseBody
-    public Object swagBootExceptionHandler(HttpServletRequest req, SwagBootCommonException e) throws Exception {
-        log.warn("服务端异常", e);
+    public CommonResult swagBootExceptionHandler(HttpServletRequest req, SwagBootCommonException e) throws Exception {
         log.warn("RequestIP:[{}], RequestURI:[{}], QueryString:[{}] , Authorization:[{}]", req.getRemoteAddr(), req.getRequestURI(), req.getQueryString(), req.getHeader("Authorization"));
-        JsonObject obj = new JsonObject();
-        JsonObject errorData = new JsonObject();
-        obj.addProperty("code", e.getExceptionCode());
-        obj.addProperty("info", e.getExceptionMsg());
-        obj.add("data", errorData);
-        return obj.toString();
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(e.getExceptionCode());
+        commonResult.setInfo(e.getExceptionMsg());
+        commonResult.setData(new JsonObject());
+        log.error("[Error]", e);
+        return commonResult;
     }
 
 
     //处理controller中带有@Validate注解的参数校验
     @ResponseBody
     @ExceptionHandler(BindException.class)
-    public Object bindExceptionHandler(BindException e) {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("code", ExceptionConstants.errer10005.getCode());
-        obj.addProperty("info", ExceptionConstants.errer10005.getInfo());
-        obj.add("data", new JsonObject());
+    public CommonResult bindExceptionHandler(BindException e) {
+        CommonResult commonResult = new CommonResult();
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
         StringBuilder moreInfo = new StringBuilder();
         if (CollectionUtils.isNotEmpty(errors)) {
@@ -68,54 +66,56 @@ public class ErrorHandler {
                             .append(":").append(error.getDefaultMessage())
                             .append(";"));
         }
-        obj.addProperty("more info", moreInfo.toString());
-        log.error("[Error]", e);
-        return obj.toString();
+        String detailErrorInfo = ExceptionConstants.errer10005.getInfo() + ":" + moreInfo.toString();
+        commonResult.setCode(ExceptionConstants.errer10005.getCode());
+        commonResult.setInfo(detailErrorInfo);
+        commonResult.setData(null);
+        return commonResult;
+
     }
 
 
     //SQL执行失败
     @ResponseBody
     @ExceptionHandler(DataAccessException.class)
-    public Object dataAccessexceptionHandler(DataAccessException e) {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("code", ExceptionConstants.errer10006.getCode());
-        obj.addProperty("info", ExceptionConstants.errer10006.getInfo());
-        obj.add("data", new JsonObject());
-        obj.addProperty("more info", e.getMessage());
-        return obj.toString();
+    public CommonResult dataAccessexceptionHandler(DataAccessException e) {
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(ExceptionConstants.errer10006.getCode());
+        commonResult.setInfo(ExceptionConstants.errer10006.getInfo());
+        commonResult.setData(null);
+        log.error("[Error]", e);
+        return commonResult;
     }
 
 
     //文件大小异常
     @ResponseBody
     @ExceptionHandler(MultipartException.class)
-    public Object multipartExceptionHandler(MultipartException e) {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("code", ExceptionConstants.errer10007.getCode());
-        obj.addProperty("info", ExceptionConstants.errer10007.getInfo());
-        obj.add("data", new JsonObject());
+    public CommonResult multipartExceptionHandler(MultipartException e) {
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(ExceptionConstants.errer10007.getCode());
         if (e instanceof MaxUploadSizeExceededException) {
-            obj.addProperty("more info", "文件上传尺寸超过限制, 不能大于" + maxFileSizeLimit);
-        }else{
-            obj.addProperty("more info", e.getMessage());
+            commonResult.setInfo(ExceptionConstants.errer10007.getInfo() + ":文件上传尺寸超过限制, 不能大于" + maxFileSizeLimit);
+        } else {
+            commonResult.setInfo(ExceptionConstants.errer10007.getInfo());
         }
-        return obj.toString();
+        commonResult.setData(null);
+        log.error("[Error]", e);
+        return commonResult;
     }
 
 
     //默认异常处理
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Object defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        log.warn("服务端异常", e);
+    public CommonResult defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         log.warn("RequestIP:[{}], RequestURI:[{}], QueryString:[{}] , Authorization:[{}]", req.getRemoteAddr(), req.getRequestURI(), req.getQueryString(), req.getHeader("Authorization"));
-        JsonObject obj = new JsonObject();
-        JsonObject errorData = new JsonObject();
-        obj.addProperty("code", ExceptionConstants.errer1000.getCode());
-        obj.addProperty("info", ExceptionConstants.errer1000.getInfo());
-        obj.add("data", errorData);
-        return obj.toString();
+        CommonResult commonResult = new CommonResult();
+        commonResult.setCode(ExceptionConstants.errer1000.getCode());
+        commonResult.setInfo(ExceptionConstants.errer1000.getInfo());
+        commonResult.setData(null);
+        log.error("[Error]", e);
+        return commonResult;
     }
 
 }

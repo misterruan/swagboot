@@ -133,6 +133,12 @@
 			<version>2.6.1</version>
 		</dependency>
 
+		<!-- pom包里面添加spring-boot-starter-data-mongodb包引用 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+
 		<!-- 以下都是一些常用的工具包 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
