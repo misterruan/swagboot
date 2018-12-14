@@ -11,6 +11,7 @@ import org.hibernate.property.access.spi.Setter;
 import org.hibernate.transform.AliasedTupleSubsetResultTransformer;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Created by rock on 2018/4/16.
@@ -26,12 +27,10 @@ public class MysqlAliasToBeanResultTransformer extends AliasedTupleSubsetResultT
     private Setter[] setters;
 
     public MysqlAliasToBeanResultTransformer(Class resultClass) {
-        if(resultClass == null) {
-            throw new IllegalArgumentException("resultClass cannot be null");
-        } else {
-            this.isInitialized = false;
-            this.resultClass = resultClass;
-        }
+        Objects.requireNonNull(resultClass, "resultClass cannot be null");
+        this.isInitialized = false;
+        this.resultClass = resultClass;
+
     }
 
     public boolean isTransformedValueATupleElement(String[] aliases, int tupleLength) {

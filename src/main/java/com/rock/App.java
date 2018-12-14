@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Arrays;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.rock")
 @Slf4j
 public class App {
 
