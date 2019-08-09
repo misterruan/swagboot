@@ -7,7 +7,7 @@ import com.rock.common.util.SwagBootStringUtil;
 import com.rock.common.util.jpa.MysqlAliasToBeanResultTransformer;
 import com.rock.model.base.CommonPageResult;
 import com.rock.model.base.PageQueryRequest;
-import groovy.util.logging.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;

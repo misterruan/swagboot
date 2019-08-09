@@ -2,6 +2,7 @@ package com.rock.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.rock.common.aspect.SaveActionLog;
+import com.rock.common.util.JsonUtils;
 import com.rock.model.base.CommonPageResult;
 import com.rock.model.base.CommonResult;
 import com.rock.model.base.PageQueryRequest;
@@ -15,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,7 @@ public class JpaDsProductController {
     private BaseDynamicService baseDynamicService;
 
 
+
     /**
      * restful风格路由
      * @param classId
@@ -41,6 +44,7 @@ public class JpaDsProductController {
     @RequestMapping(value = "/{classId}",  produces = { "application/json" }, method = { RequestMethod.GET })
     @ApiOperation(value = "使用商品分类精确查询")
     public CommonResult<DsClasses> findByClassId(@PathVariable @ApiParam(value = "分类Id", required = true)Long classId) {
+
 
         CommonResult<DsClasses> commonResult = new CommonResult<>();
         commonResult.setData(jpaDsClassesService.findByClassId(classId));

@@ -11,14 +11,9 @@ import com.rock.repository.jpa.one2many.DsClassRepository;
 import com.rock.service.base.BaseJpaService;
 import org.apache.catalina.Store;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.groovy.syntax.Token;
-import org.codehaus.groovy.syntax.TokenException;
 import org.dom4j.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -52,8 +47,8 @@ public class JpaDsClassesServiceImpl{
     }
 
     public DsClasses findByClassId(Long Id) {
-	    throw new NullPointerException("test");
-//        return dsClassRepository.findOne(Id);
+//	    throw new NullPointerException("test");
+        return dsClassRepository.findById(Id).orElse(null);
     }
 
     public List<DsClasses> findByClassNameLike(String className) {

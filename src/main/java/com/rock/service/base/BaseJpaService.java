@@ -111,7 +111,7 @@ public abstract class BaseJpaService<T extends AbstractEntity> {
         }
 
         //由于 version 存在, 必须先取出原记录, 直接 save 则会执行 sql insert
-        T last = getRepository().findOne(bean.getId());
+        T last = getRepository().findById(bean.getId()).orElse(null);
 
         if(ObjectUtils.isEmpty(last)) {
             throw new SwagBootCommonException(ExceptionConstants.errer10002.getCode(),
@@ -147,7 +147,7 @@ public abstract class BaseJpaService<T extends AbstractEntity> {
      */
     @Transactional
     public T delete(Long id)  {
-        T bean = getRepository().findOne(id);
+        T bean = getRepository().findById(id).orElse(null);
 
         if(ObjectUtils.isEmpty(bean)) {
             throw new SwagBootCommonException(ExceptionConstants.errer10002.getCode(),
@@ -156,7 +156,7 @@ public abstract class BaseJpaService<T extends AbstractEntity> {
 
         beforeDelete(bean);
 
-        getRepository().delete(id);
+        getRepository().deleteById(id);
         return bean;
     }
 
