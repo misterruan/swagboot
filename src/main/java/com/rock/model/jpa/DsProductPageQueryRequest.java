@@ -7,12 +7,13 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 public class DsProductPageQueryRequest extends PageQueryRequest{
 
     @ApiModelProperty("分类名称")
-    @NotBlank
+    @NotEmpty
     private String className;
 
     @ApiModelProperty("名字")

@@ -22,6 +22,41 @@ public class CommonResult<T> {
     @JsonProperty("data")
     private T data = null;
 
+    /**
+     * build
+     * @param code
+     * @param info
+     * @param data
+     */
+    public static <V> CommonResult<V> build(Integer code, String info, V data) {
+        CommonResult result = new CommonResult();
+        result.setCode(code);
+        result.setInfo(info);
+        result.setData(data);
+        return result;
+    }
 
+    /**
+     * 默认的成功返回
+     *
+     * @param data
+     * @param <V>
+     * @return
+     */
+    public static <V> CommonResult<V> ok(V data) {
+        return build(ExceptionConstants.success.getCode(), ExceptionConstants.success.getInfo(), data);
+    }
+
+    /**
+     * 自定义的失败返回
+     *
+     * @param code
+     * @param info
+     * @param <V>
+     * @return
+     */
+    private <V> CommonResult<V> fail(Integer code, String info) {
+        return build(code, info, null);
+    }
 }
 

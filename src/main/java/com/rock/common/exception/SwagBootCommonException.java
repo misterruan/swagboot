@@ -4,10 +4,10 @@ package com.rock.common.exception;
  * Created by rock on 2017/4/20.
  * 项目的通用异常，一般命名规则为：项目名+Common/Base+Exception
  */
-public class SwagBootCommonException extends RuntimeException{
+public class SwagBootCommonException extends RuntimeException {
 
     //异常对应的返回码
-    private Integer exceptionCode ;
+    private Integer exceptionCode;
     //异常对应的描述信息
     private String exceptionMsg;
 

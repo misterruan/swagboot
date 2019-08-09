@@ -1,6 +1,5 @@
 package com.rock.congfig;
 
-import com.google.gson.JsonObject;
 import com.rock.common.exception.ExceptionConstants;
 import com.rock.common.exception.SwagBootCommonException;
 import com.rock.model.base.CommonResult;
@@ -16,13 +15,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 全局的异常捕获处理
@@ -44,12 +39,8 @@ public class ErrorHandler {
     @ResponseBody
     public CommonResult swagBootExceptionHandler(HttpServletRequest req, SwagBootCommonException e) throws Exception {
         log.warn("RequestIP:[{}], RequestURI:[{}], QueryString:[{}] , Authorization:[{}]", req.getRemoteAddr(), req.getRequestURI(), req.getQueryString(), req.getHeader("Authorization"));
-        CommonResult commonResult = new CommonResult();
-        commonResult.setCode(e.getExceptionCode());
-        commonResult.setInfo(e.getExceptionMsg());
-        commonResult.setData(new JsonObject());
         log.error("[Error]", e);
-        return commonResult;
+        return CommonResult.build(e.getExceptionCode(), e.getExceptionMsg(), null);
     }
 
 
@@ -57,7 +48,6 @@ public class ErrorHandler {
     @ResponseBody
     @ExceptionHandler(BindException.class)
     public CommonResult bindExceptionHandler(BindException e) {
-        CommonResult commonResult = new CommonResult();
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
         StringBuilder moreInfo = new StringBuilder();
         if (CollectionUtils.isNotEmpty(errors)) {
@@ -67,11 +57,7 @@ public class ErrorHandler {
                             .append(";"));
         }
         String detailErrorInfo = ExceptionConstants.errer10005.getInfo() + ":" + moreInfo.toString();
-        commonResult.setCode(ExceptionConstants.errer10005.getCode());
-        commonResult.setInfo(detailErrorInfo);
-        commonResult.setData(null);
-        return commonResult;
-
+        return CommonResult.build(ExceptionConstants.errer10005.getCode(), detailErrorInfo, null);
     }
 
 
@@ -79,12 +65,8 @@ public class ErrorHandler {
     @ResponseBody
     @ExceptionHandler(DataAccessException.class)
     public CommonResult dataAccessexceptionHandler(DataAccessException e) {
-        CommonResult commonResult = new CommonResult();
-        commonResult.setCode(ExceptionConstants.errer10006.getCode());
-        commonResult.setInfo(ExceptionConstants.errer10006.getInfo());
-        commonResult.setData(null);
         log.error("[Error]", e);
-        return commonResult;
+        return CommonResult.build(ExceptionConstants.errer10006.getCode(), ExceptionConstants.errer10006.getInfo(), null);
     }
 
 
@@ -92,16 +74,14 @@ public class ErrorHandler {
     @ResponseBody
     @ExceptionHandler(MultipartException.class)
     public CommonResult multipartExceptionHandler(MultipartException e) {
-        CommonResult commonResult = new CommonResult();
-        commonResult.setCode(ExceptionConstants.errer10007.getCode());
+        String info = null;
         if (e instanceof MaxUploadSizeExceededException) {
-            commonResult.setInfo(ExceptionConstants.errer10007.getInfo() + ":文件上传尺寸超过限制, 不能大于" + maxFileSizeLimit);
+            info = ExceptionConstants.errer10007.getInfo() + ":文件上传尺寸超过限制, 不能大于" + maxFileSizeLimit;
         } else {
-            commonResult.setInfo(ExceptionConstants.errer10007.getInfo());
+            info = ExceptionConstants.errer10007.getInfo();
         }
-        commonResult.setData(null);
         log.error("[Error]", e);
-        return commonResult;
+        return CommonResult.build(ExceptionConstants.errer10007.getCode(), info, null);
     }
 
 
@@ -110,12 +90,8 @@ public class ErrorHandler {
     @ResponseBody
     public CommonResult defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         log.warn("RequestIP:[{}], RequestURI:[{}], QueryString:[{}] , Authorization:[{}]", req.getRemoteAddr(), req.getRequestURI(), req.getQueryString(), req.getHeader("Authorization"));
-        CommonResult commonResult = new CommonResult();
-        commonResult.setCode(ExceptionConstants.errer1000.getCode());
-        commonResult.setInfo(ExceptionConstants.errer1000.getInfo());
-        commonResult.setData(null);
         log.error("[Error]", e);
-        return commonResult;
+        return CommonResult.build(ExceptionConstants.errer1000.getCode(), ExceptionConstants.errer1000.getInfo(), null);
     }
 
 }
