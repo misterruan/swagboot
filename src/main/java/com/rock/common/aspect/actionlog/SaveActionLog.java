@@ -1,4 +1,4 @@
-package com.rock.common.aspect;
+package com.rock.common.aspect.actionlog;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

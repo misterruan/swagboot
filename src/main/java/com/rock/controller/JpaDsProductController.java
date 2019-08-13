@@ -1,11 +1,9 @@
 package com.rock.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.rock.common.aspect.SaveActionLog;
-import com.rock.common.util.JsonUtils;
+import com.rock.common.aspect.actionlog.SaveActionLog;
 import com.rock.model.base.CommonPageResult;
 import com.rock.model.base.CommonResult;
-import com.rock.model.base.PageQueryRequest;
 import com.rock.model.jpa.DsClasses;
 import com.rock.model.jpa.DsProductPageQueryRequest;
 import com.rock.model.jpa.DsProductVo;
@@ -15,8 +13,6 @@ import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

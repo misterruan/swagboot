@@ -14,6 +14,7 @@ public class ExceptionConstants {
     public static final Constant success = new Constant(0,"OK");
     public static final Constant errer1000 = new Constant(1000,"服务端错误");
     public static final Constant errer1001 = new Constant(1001,"Token解析错误");
+    public static final Constant errer1002 = new Constant(1002,"重复的请求");
 
 
 

@@ -1,4 +1,4 @@
-package com.rock.common.aspect;
+package com.rock.common.aspect.actionlog;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -35,7 +35,7 @@ public class ActionLogAspect {
     private ActionLogRepository actionLogRepository;
 
 
-    @Pointcut("@annotation(com.rock.common.aspect.SaveActionLog)")
+    @Pointcut("@annotation(com.rock.common.aspect.actionlog.SaveActionLog)")
     public void annotationAspect() { }
 
 
