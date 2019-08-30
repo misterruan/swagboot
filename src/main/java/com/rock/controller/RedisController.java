@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
@@ -24,10 +26,11 @@ public class RedisController {
 
 
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private StringRedisTemplate redisTemplate;
 
     @Autowired
-    private RedisTemplate<String, Object> objectRedisTemplate;
+    @Qualifier("redisTemplate")
+    private RedisTemplate objectRedisTemplate;
 
     @RequestMapping(value = "/test/getValueByKey/{key}",  produces = { "application/json" }, method = { RequestMethod.GET })
     @ApiOperation(value = "根据key获取value")
