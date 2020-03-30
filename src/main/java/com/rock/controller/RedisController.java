@@ -36,6 +36,7 @@ public class RedisController {
     @ApiOperation(value = "根据key获取value")
     public CommonResult getValueByKey(@PathVariable @ApiParam(value = "key", required = true)String key) {
 //        redisTemplate.opsForValue().set("rock2","fffwefeff fwef ewfe ");
+//        objectRedisTemplate.opsForList().rightPush()
         return CommonResult.ok(null);
     }
 

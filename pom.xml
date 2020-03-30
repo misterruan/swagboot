@@ -185,6 +185,22 @@
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.3</version>
 		</dependency>
+		<!-- canal的客户端，用于处理binlog同步-->
+		<dependency>
+			<groupId>com.alibaba.otter</groupId>
+			<artifactId>canal.client</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- springboot集成kafka -->
+		<!--
+spring-kafka（它包装了apache的kafka-client）的依赖包版本是 1.0.6.RELEASE， 是因为我Linux服务器上部署的kafka服务器的版本是kafka_2.10-0.9.0.1，
+使用的kafka的时候要注意，kafka客户端（kafka-client）的版本要和kafka服务器的版本一一对应，否则，消息会消费失败。
+Spring官方网站上给出了SpringKafka和kafka-client版本（它的版本号要和kafka服务器的版本保持一致）的对应关系：https://projects.spring.io/spring-kafka/
+		-->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
 		<!--显示hibernate 完整sql和执行时间,加了之后会导致启动创建数据源对象报错,暂时注释-->
 		<!--<dependency>-->
 			<!--<groupId>com.googlecode.log4jdbc</groupId>-->
