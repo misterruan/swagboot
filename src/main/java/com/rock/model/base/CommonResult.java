@@ -47,6 +47,17 @@ public class CommonResult<T> {
         return build(ExceptionConstants.success.getCode(), ExceptionConstants.success.getInfo(), data);
     }
 
+
+    /**
+     * 默认的成功返回
+     *
+     * @param <V>
+     * @return
+     */
+    public static <V> CommonResult<V> ok() {
+        return build(ExceptionConstants.success.getCode(), ExceptionConstants.success.getInfo(), null);
+    }
+
     /**
      * 自定义的失败返回
      *

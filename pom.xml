@@ -207,6 +207,13 @@ Spring官方网站上给出了SpringKafka和kafka-client版本（它的版本号
 			<!--<artifactId>log4jdbc</artifactId>-->
 			<!--<version>1.2</version>-->
 		<!--</dependency>-->
+
+		<!-- websocket支持 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<profiles>
