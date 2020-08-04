@@ -183,7 +183,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.3</version>
+			<version>1.9.4</version>
 		</dependency>
 		<!-- canal的客户端，用于处理binlog同步-->
 		<dependency>
