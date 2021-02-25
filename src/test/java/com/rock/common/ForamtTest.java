@@ -11,6 +11,7 @@ import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by user on 2017/3/26.
@@ -51,6 +52,12 @@ public class ForamtTest {
         NumberFormat percent = NumberFormat.getPercentInstance();
         percent.setMaximumFractionDigits(2);
 
+    }
+
+
+    public boolean lock() {
+        AtomicBoolean locked = new AtomicBoolean(false);
+        return locked.compareAndSet(false, true);
     }
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径,tomcat的logs目录中-->
-    <property name="LOG_HOME" value="/app/logs/swagboot" />
+    <property name="LOG_HOME" value="/Users/ruanqiangsong/rock/logs/swagboot" />
 
     <!-- appender 的配置表示打印到控制台。 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

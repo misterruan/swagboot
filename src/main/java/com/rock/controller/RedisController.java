@@ -1,6 +1,7 @@
 package com.rock.controller;
 
 import com.rock.common.aspect.redislock.RedisLock;
+import com.rock.common.aspect.redislock.RedisLockClient;
 import com.rock.model.base.CommonResult;
 import com.rock.model.test.Student;
 import io.swagger.annotations.Api;
@@ -32,6 +33,9 @@ public class RedisController {
     @Qualifier("redisTemplate")
     private RedisTemplate objectRedisTemplate;
 
+    @Autowired
+    private RedisLockClient lockClient;
+
     @RequestMapping(value = "/test/getValueByKey/{key}",  produces = { "application/json" }, method = { RequestMethod.GET })
     @ApiOperation(value = "根据key获取value")
     public CommonResult getValueByKey(@PathVariable @ApiParam(value = "key", required = true)String key) {
@@ -60,6 +64,7 @@ public class RedisController {
     }
 
 
+
     @RequestMapping(value = "/test/lock/suffix",  produces = { "application/json" }, method = { RequestMethod.GET })
     @ApiOperation(value = "布式锁:后缀")
     //使用的是使用SPEL表达式
@@ -67,6 +72,7 @@ public class RedisController {
     public CommonResult test3(String a,String b) {
         return CommonResult.ok(null);
     }
+
 
     @RequestMapping(value = "/test/lock/default",  produces = { "application/json" }, method = { RequestMethod.POST })
     @ApiOperation(value = "布式锁:默认")
@@ -76,4 +82,41 @@ public class RedisController {
     public CommonResult test4(@RequestBody Student student) {
         return CommonResult.ok(null);
     }
+
+
+    @RequestMapping(value = "/test/lock/manual",  produces = { "application/json" }, method = { RequestMethod.GET })
+    @ApiOperation(value = "布式锁:手动测试加解锁")
+    public CommonResult test5() throws InterruptedException {
+        boolean lock = lockClient.getLock("aaaaa", 2);
+        boolean lock2 = lockClient.getLock("aaaaa", 2);
+        Thread.sleep(3000);
+        boolean lock3 = lockClient.getLock("aaaaa", 2);
+        return CommonResult.ok("lock:"+lock+",lock2:"+lock2+",lock3:"+lock3);
+    }
+
+
+
+
+    @RequestMapping(value = "/test/lock/testSameLock1",  produces = { "application/json" }, method = { RequestMethod.GET })
+    @ApiOperation(value = "布式锁:先请求testSameLock1,再请求testSameLock2模拟同一把分布式锁被占用情况")
+    @RedisLock(prefix = "A" ,suffix = "B",expireSec = 10)
+    public CommonResult testSameLock1() throws InterruptedException {
+        try {
+            //模拟耗时常见，并发请求，后请求链接返回系统错误值
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return CommonResult.ok(null);
+    }
+
+
+    @RequestMapping(value = "/test/lock/testSameLock2",  produces = { "application/json" }, method = { RequestMethod.GET })
+    @ApiOperation(value = "布式锁:先请求testSameLock1,再请求testSameLock2模拟同一把分布式锁被占用情况")
+    @RedisLock(prefix = "A" ,suffix = "B",expireSec = 10)
+    public CommonResult testSameLock2() throws InterruptedException {
+        return CommonResult.ok(null);
+    }
+
+
 }
