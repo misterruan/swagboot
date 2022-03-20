@@ -15,6 +15,7 @@ public class MatcherTest {
 @Test
     public void test() {
         //SELECT 列名称（*所有列） FROM 表名称
+
         //SELECT 列名称 FROM 表名称 where 条件
     String sql ="SELECT\n" +
             "                \"s.id skuId,s.sub1,s.sub2,p.id spuId,p.spu,p.images,p.detail_images,\\n\" +\n" +
@@ -42,6 +43,7 @@ public class MatcherTest {
     public static String matchSql(String sql){
         Matcher matcher = null;
         //SELECT 列名称 FROM 表名称
+
         //SELECT * FROM 表名称
         sql = sql.toLowerCase();
         if( sql.startsWith("select") ){
